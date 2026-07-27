@@ -1,4 +1,5 @@
-import { Cpu, Phone, Mail, MapPin } from "lucide-react";
+import Image from "next/image";
+import { Phone, Mail, MapPin } from "lucide-react";
 
 export default function Footer() {
   const currentYear = new Date().getFullYear();
@@ -11,18 +12,14 @@ export default function Footer() {
           
           {/* Column 1: Info and Brand */}
           <div className="space-y-4">
-            <div className="flex items-center space-x-2">
-              <div className="bg-white p-2 rounded-lg border border-slate-200 shadow-sm flex items-center justify-center">
-                <Cpu className="h-5 w-5 text-slate-700" />
-              </div>
-              <div className="flex flex-col">
-                <span className="text-sm font-bold tracking-wider uppercase text-slate-800 leading-tight">
-                  Agencia de Software
-                </span>
-                <span className="text-xs font-semibold text-slate-500 tracking-wide">
-                  & Automatización Local
-                </span>
-              </div>
+            <div className="flex items-center">
+              <Image
+                src="/logo.png"
+                alt="Agencia de Software & Automatización Local"
+                width={150}
+                height={80}
+                className="h-8 sm:h-10 w-auto"
+              />
             </div>
             <p className="text-sm text-slate-600 max-w-sm">
               Especialistas en digitalizar pymes locales. Eliminamos el papel, aumentamos tus ventas y automatizamos tus flujos de trabajo.
