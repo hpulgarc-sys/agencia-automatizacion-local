@@ -1,7 +1,8 @@
 "use client";
 
 import { useState } from "react";
-import { MessageSquare, Menu, X, Cpu } from "lucide-react";
+import Image from "next/image";
+import { MessageSquare, Menu, X } from "lucide-react";
 
 export default function Header() {
   const [isOpen, setIsOpen] = useState(false);
@@ -18,19 +19,16 @@ export default function Header() {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between items-center h-16 sm:h-20">
           {/* Logo */}
-          <div className="flex items-center space-x-2">
-            <div className="bg-slate-100 p-2 rounded-lg border border-slate-200 shadow-sm flex items-center justify-center">
-              <Cpu className="h-5 w-5 text-slate-700 animate-pulse-slow" />
-            </div>
-            <div className="flex flex-col">
-              <span className="text-sm font-bold tracking-wider uppercase text-slate-800 leading-tight">
-                Agencia de Software
-              </span>
-              <span className="text-xs font-semibold text-slate-500 tracking-wide">
-                & Automatización Local
-              </span>
-            </div>
-          </div>
+          <a href="#" className="flex items-center hover:opacity-90 transition-opacity">
+            <Image
+              src="/logo.png"
+              alt="Agencia de Software & Automatización Local"
+              width={150}
+              height={80}
+              className="h-8 sm:h-10 w-auto"
+              priority
+            />
+          </a>
 
           {/* Desktop Nav Links */}
           <nav className="hidden md:flex space-x-8 items-center">
