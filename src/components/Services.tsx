@@ -1,4 +1,4 @@
-import { ChefHat, FileSpreadsheet, LineChart, Check } from "lucide-react";
+import { ChefHat, FileSpreadsheet, LineChart, Check, Globe } from "lucide-react";
 
 export default function Services() {
   const services = [
@@ -50,6 +50,22 @@ export default function Services() {
       ctaText: "Cotizar Control de Ventas",
       ctaHref: "#cotizar",
     },
+    {
+      id: "diseno-web",
+      icon: <Globe className="h-6 w-6 text-slate-700" />,
+      title: "Diseño Web & Landing Pages de Alta Conversión",
+      subtitle: "Presencia online moderna y veloz",
+      description:
+        "Sitios web corporativos y páginas de aterrizaje (Landing Pages) modernas, rápidas y optimizadas para móviles. Diseñadas para convertir visitantes en clientes directos a tu WhatsApp.",
+      features: [
+        "Desarrollo Mobile-First ultra veloz",
+        "Optimización SEO para posicionamiento local",
+        "Integración directa de chat y formularios",
+        "Dominio personalizado y hosting incluido",
+      ],
+      ctaText: "Cotizar Sitio Web",
+      ctaHref: "#cotizar",
+    },
   ];
 
   return (
@@ -70,7 +86,7 @@ export default function Services() {
         </div>
 
         {/* Services Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 lg:gap-8">
           {services.map((service, index) => (
             <div
               key={index}
