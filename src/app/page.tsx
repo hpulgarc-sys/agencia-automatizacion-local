@@ -1,7 +1,9 @@
 import Header from "@/components/Header";
 import Hero from "@/components/Hero";
 import Services from "@/components/Services";
+import NicheSolutions from "@/components/NicheSolutions";
 import Demos from "@/components/Demos";
+import TurnkeyKit from "@/components/TurnkeyKit";
 import QuoteForm from "@/components/QuoteForm";
 import FloatingWhatsApp from "@/components/FloatingWhatsApp";
 import Footer from "@/components/Footer";
@@ -13,7 +15,9 @@ export default function Home() {
       <main className="flex-grow">
         <Hero />
         <Services />
+        <NicheSolutions />
         <Demos />
+        <TurnkeyKit />
         <QuoteForm />
       </main>
       <Footer />

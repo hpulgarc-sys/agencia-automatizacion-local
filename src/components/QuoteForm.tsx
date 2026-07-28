@@ -31,11 +31,16 @@ export default function QuoteForm() {
   ];
 
   const services = [
-    "Menú Digital Interactivo & Monitor de Cocina (KDS)",
-    "Digitalización de Talonarios y Fichas de Trabajo (PDF automático)",
-    "Reportes Automatizados y Control de Stock/Ventas",
-    "Automatización de Formularios a Medida",
-    "Otros Servicios de Software",
+    "Desarrollo Web & PWA de Alto Rendimiento (Next.js)",
+    "Motor de Agendamiento Online Inteligente (24/7 + Abonos)",
+    "Automatización de Procesos & Notificaciones (WhatsApp, PDF)",
+    "Nicho: Gastronomía & Restaurantes (Menú QR + KDS)",
+    "Nicho: Estética, Barberías & Tatuajes (Agenda + Abonos)",
+    "Nicho: Sector Automotriz (Ficha Digital + Lubricentros)",
+    "Nicho: Transporte & Logística (Checklist + Combustible)",
+    "Nicho: Instituciones Educativas & Colegios (Comunicaciones)",
+    "Kit Llave en Mano (Software + Tablet Android en Modo Kiosco)",
+    "Otros desarrollos a medida",
   ];
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement>) => {
@@ -64,14 +69,14 @@ export default function QuoteForm() {
       return;
     }
 
-    // Build WhatsApp message
-    const message = `Hola, me interesa una cotización para mi negocio.
+    // Build WhatsApp message for Demo Presencial request
+    const message = `Hola, me interesa solicitar una Demo Presencial en mi local.
 
-*Detalles de Cotización:*
+*Detalles del Negocio:*
 • *Negocio:* ${formData.businessName.trim()}
 • *Ciudad:* ${formData.city}
-• *Servicio:* ${formData.service}
-• *Detalles:* ${formData.details.trim() || "Sin detalles adicionales."}`;
+• *Servicio/Solución:* ${formData.service}
+• *Detalles:* ${formData.details.trim() || "Deseo coordinar fecha para la demo."}`;
 
     const phoneNumber = "56997913248";
     const encodedText = encodeURIComponent(message);
@@ -88,13 +93,13 @@ export default function QuoteForm() {
         {/* Header */}
         <div className="text-center max-w-2xl mx-auto mb-12 space-y-4">
           <h2 className="text-xs font-bold uppercase tracking-widest text-slate-400">
-            Cotización Rápida
+            Agenda tu Demo
           </h2>
           <p className="text-3xl font-extrabold text-slate-900 tracking-tight sm:text-4xl">
-            Automatiza tu Negocio Hoy
+            Solicita una Demo Presencial en tu Local
           </p>
           <p className="text-base text-slate-600">
-            Completa los siguientes datos y haz clic en el botón. Te redirigiremos a WhatsApp con tu cotización estructurada lista para enviar.
+            Completa los datos de tu negocio y coordinemos una visita presencial en la Región de O&apos;Higgins para mostrarte el sistema funcionando en vivo.
           </p>
         </div>
 
@@ -197,7 +202,7 @@ export default function QuoteForm() {
                 className="w-full sm:w-auto inline-flex items-center justify-center space-x-2 bg-slate-950 text-white hover:bg-slate-900 px-8 py-4 rounded-xl text-base font-bold border border-slate-800 hover:border-slate-700 shadow-md hover:shadow-lg transition-all group duration-300 cursor-pointer"
               >
                 <MessageSquare className="h-5 w-5 text-green-400 group-hover:scale-110 transition-transform duration-300" />
-                <span>Enviar Cotización por WhatsApp</span>
+                <span>Solicitar Demo Presencial por WhatsApp</span>
               </button>
             </div>
 

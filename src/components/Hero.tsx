@@ -1,7 +1,7 @@
 import { MessageSquare, ArrowRight, CheckCircle2, ShieldCheck, Zap } from "lucide-react";
 
 export default function Hero() {
-  const whatsappUrl = "https://wa.me/56997913248?text=Hola,%20me%20interesa%20digitalizar%20mi%20negocio.";
+  const whatsappUrl = "https://wa.me/56997913248?text=Hola,%20me%20interesa%20solicitar%20una%20demo%20presencial%20en%20mi%20local.";
 
   return (
     <section className="relative overflow-hidden bg-slate-50 py-16 sm:py-24 lg:py-32 border-b border-slate-200">
@@ -62,7 +62,7 @@ export default function Hero() {
                 className="w-full sm:w-auto inline-flex items-center justify-center space-x-2 bg-slate-950 text-white hover:bg-slate-900 px-8 py-4 rounded-xl text-base font-bold border border-slate-800 hover:border-slate-700 shadow-md hover:shadow-lg transition-all group duration-300"
               >
                 <MessageSquare className="h-5 w-5 text-green-400 group-hover:scale-110 transition-transform duration-300" />
-                <span>Hablar por WhatsApp</span>
+                <span>Solicitar Demo Presencial</span>
               </a>
               
               <a
