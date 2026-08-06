@@ -2,6 +2,7 @@ import Header from "@/components/Header";
 import Hero from "@/components/Hero";
 import Services from "@/components/Services";
 import NicheSolutions from "@/components/NicheSolutions";
+import BannerAnimado from "@/components/BannerAnimado";
 import Demos from "@/components/Demos";
 import TurnkeyKit from "@/components/TurnkeyKit";
 import QuoteForm from "@/components/QuoteForm";
@@ -16,6 +17,7 @@ export default function Home() {
         <Hero />
         <Services />
         <NicheSolutions />
+        <BannerAnimado />
         <Demos />
         <TurnkeyKit />
         <QuoteForm />

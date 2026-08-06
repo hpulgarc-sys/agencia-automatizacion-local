@@ -1,0 +1,22 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 400" fill="none">
+  <defs>
+    <linearGradient id="silver-grad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#ffffff"/>
+      <stop offset="50%" stop-color="#f8fafc"/>
+      <stop offset="100%" stop-color="#e2e8f0"/>
+    </linearGradient>
+    <pattern id="grid" width="40" height="40" patternUnits="userSpaceOnUse">
+      <path d="M 40 0 L 0 0 0 40" fill="none" stroke="#cbd5e1" stroke-width="0.75"/>
+    </pattern>
+  </defs>
+  {/* Base background */}
+  <rect width="1440" height="400" fill="url(#silver-grad)"/>
+  
+  {/* Grid overlay with low opacity */}
+  <rect width="1440" height="400" fill="url(#grid)" opacity="0.15"/>
+  
+  {/* Smooth wave paths representing process flow */}
+  <path d="M 0,200 C 400,320 800,100 1200,280 L 1440,240 L 1440,400 L 0,400 Z" fill="#f1f5f9" opacity="0.4"/>
+  <path d="M 0,150 C 300,280 900,120 1200,220 C 1350,270 1440,200 1440,200" stroke="#94a3b8" stroke-width="1.5" stroke-dasharray="10 5" opacity="0.25"/>
+  <path d="M 0,300 C 500,200 800,350 1440,260" stroke="#cbd5e1" stroke-width="1" opacity="0.3"/>
+</svg>
