@@ -2,11 +2,10 @@
 
 import { useState } from "react";
 import Image from "next/image";
-import { MessageSquare, Menu, X } from "lucide-react";
+import { Menu, X } from "lucide-react";
 
 export default function Header() {
   const [isOpen, setIsOpen] = useState(false);
-  const whatsappUrl = "https://wa.me/56997913248?text=Hola,%20me%20interesa%20digitalizar%20mi%20negocio.";
 
   const navLinks = [
     { name: "Servicios", href: "#servicios" },
@@ -42,16 +41,7 @@ export default function Header() {
               </a>
             ))}
             
-            {/* WhatsApp CTA */}
-            <a
-              href={whatsappUrl}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="inline-flex items-center space-x-2 bg-slate-900 text-white hover:bg-slate-800 text-sm font-medium px-4 py-2 rounded-full border border-slate-700 hover:border-slate-600 transition-all shadow-sm group"
-            >
-              <MessageSquare className="h-4 w-4 text-green-400 group-hover:scale-110 transition-transform" />
-              <span>WhatsApp</span>
-            </a>
+
           </nav>
 
           {/* Mobile Menu Button */}
@@ -80,17 +70,7 @@ export default function Header() {
               {link.name}
             </a>
           ))}
-          <div className="pt-2">
-            <a
-              href={whatsappUrl}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="flex w-full items-center justify-center space-x-2 bg-slate-900 text-white py-3 px-4 rounded-xl border border-slate-700 text-base font-medium transition-all"
-            >
-              <MessageSquare className="h-5 w-5 text-green-400" />
-              <span>Hablar por WhatsApp</span>
-            </a>
-          </div>
+
         </div>
       )}
     </header>
