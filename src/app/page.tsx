@@ -14,10 +14,10 @@ export default function Home() {
     <>
       <Header />
       <main className="flex-grow">
+        <BannerAnimado />
         <Hero />
         <Services />
         <NicheSolutions />
-        <BannerAnimado />
         <Demos />
         <TurnkeyKit />
         <QuoteForm />
