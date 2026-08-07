@@ -5,6 +5,7 @@ import NicheSolutions from "@/components/NicheSolutions";
 import BannerAnimado from "@/components/BannerAnimado";
 import Demos from "@/components/Demos";
 import TurnkeyKit from "@/components/TurnkeyKit";
+import NosotrosSection from "@/components/NosotrosSection";
 import QuoteForm from "@/components/QuoteForm";
 import FloatingWhatsApp from "@/components/FloatingWhatsApp";
 import Footer from "@/components/Footer";
@@ -20,6 +21,7 @@ export default function Home() {
         <NicheSolutions />
         <Demos />
         <TurnkeyKit />
+        <NosotrosSection />
         <QuoteForm />
       </main>
       <Footer />
