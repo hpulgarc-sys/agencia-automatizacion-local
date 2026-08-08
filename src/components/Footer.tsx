@@ -6,7 +6,7 @@ export default function Footer() {
   const whatsappUrl = "https://wa.me/56997913248?text=Hola,%20me%20interesa%20digitalizar%20mi%20negocio.";
 
   return (
-    <footer className="bg-slate-50 border-t border-slate-200 py-12 mt-auto">
+    <footer className="bg-slate-cold border-t border-slate-200 py-12 mt-auto">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8 pb-8 border-b border-slate-200">
           
@@ -25,59 +25,59 @@ export default function Footer() {
               Especialistas en digitalizar pymes locales. Eliminamos el papel, aumentamos tus ventas y automatizamos tus flujos de trabajo.
             </p>
           </div>
-
+ 
           {/* Column 2: Navigation Links */}
           <div>
-            <h3 className="text-sm font-semibold text-slate-800 uppercase tracking-wider mb-4">
+            <h3 className="text-sm font-semibold text-primary uppercase tracking-wider mb-4">
               Navegación
             </h3>
             <ul className="space-y-2.5">
               <li>
-                <a href="#servicios" className="text-sm text-slate-600 hover:text-slate-900 transition-colors">
+                <a href="#servicios" className="text-sm text-slate-600 hover:text-primary transition-colors">
                   Servicios Principales
                 </a>
               </li>
               <li>
-                <a href="#demos" className="text-sm text-slate-600 hover:text-slate-900 transition-colors">
+                <a href="#demos" className="text-sm text-slate-600 hover:text-primary transition-colors">
                   Demos en Vivo Interactiva
                 </a>
               </li>
               <li>
-                <a href="#cotizar" className="text-sm text-slate-600 hover:text-slate-900 transition-colors">
+                <a href="#cotizar" className="text-sm text-slate-600 hover:text-primary transition-colors">
                   Cotización Rápida
                 </a>
               </li>
             </ul>
           </div>
-
+ 
           {/* Column 3: Contact & Location */}
           <div className="space-y-4">
-            <h3 className="text-sm font-semibold text-slate-800 uppercase tracking-wider mb-4">
+            <h3 className="text-sm font-semibold text-primary uppercase tracking-wider mb-4">
               Contacto Local
             </h3>
             <ul className="space-y-3">
-              <li className="flex items-start space-x-3 text-sm text-slate-600">
-                <MapPin className="h-5 w-5 text-slate-400 shrink-0" />
+              <li className="flex items-start space-x-3 text-sm text-slate-655">
+                <MapPin className="h-5 w-5 text-accent shrink-0" />
                 <span>Región de O&apos;Higgins, Chile</span>
               </li>
-              <li className="flex items-center space-x-3 text-sm text-slate-600">
-                <Phone className="h-5 w-5 text-slate-400 shrink-0" />
+              <li className="flex items-center space-x-3 text-sm text-slate-655">
+                <Phone className="h-5 w-5 text-primary shrink-0" />
                 <a
                   href={whatsappUrl}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="hover:text-slate-900 hover:underline transition-colors"
+                  className="hover:text-primary hover:underline transition-colors"
                 >
                   +56 9 9791 3248
                 </a>
               </li>
-              <li className="flex items-center space-x-3 text-sm text-slate-600">
-                <Mail className="h-5 w-5 text-slate-400 shrink-0" />
+              <li className="flex items-center space-x-3 text-sm text-slate-655">
+                <Mail className="h-5 w-5 text-accent shrink-0" />
                 <span>contacto@softwarelocal.cl</span>
               </li>
             </ul>
           </div>
-
+ 
         </div>
 
         {/* Bottom copyright */}

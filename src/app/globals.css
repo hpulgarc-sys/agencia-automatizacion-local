@@ -19,6 +19,13 @@
   --font-sans: var(--font-geist-sans), Arial, sans-serif;
   --font-mono: var(--font-geist-mono), monospace;
   
+  --color-primary: #0A2540;
+  --color-accent: #00E676;
+  --color-gold: #D4AF37;
+  --color-navy-light: #0D3B66;
+  --color-slate-cold: #F8FAFC;
+  --color-slate-card: #F1F5F9;
+  
   --animate-pulse-slow: pulse 3s cubic-bezier(0.4, 0, 0.6, 1) infinite;
   --animate-float: float 6s ease-in-out infinite;
   --animate-shimmer: shimmer 2.5s linear infinite;

@@ -5,7 +5,7 @@ import { Utensils, Scissors, Car, Truck, GraduationCap, CheckCircle2, MessageSqu
 
 interface NicheInfo {
   id: string;
-  icon: React.ReactNode;
+  icon: React.ComponentType<{ className?: string }>;
   label: string;
   badge: string;
   title: string;
@@ -16,14 +16,14 @@ interface NicheInfo {
   ctaText: string;
   ctaHref: string;
 }
-
+ 
 export default function NicheSolutions() {
   const [activeTab, setActiveTab] = useState("gastronomia");
-
+ 
   const niches: NicheInfo[] = [
     {
       id: "gastronomia",
-      icon: <Utensils className="h-5 w-5" />,
+      icon: Utensils,
       label: "Gastronomía & Restaurantes",
       badge: "Restaurantes, Cafés, Pubs",
       title: "Optimiza tu salón y cocina en tiempo real",
@@ -45,7 +45,7 @@ export default function NicheSolutions() {
     },
     {
       id: "estetica",
-      icon: <Scissors className="h-5 w-5" />,
+      icon: Scissors,
       label: "Estética, Barberías & Tatuajes",
       badge: "Salones, Barberías, Spas",
       title: "Control total de tu agenda con abonos integrados",
@@ -67,7 +67,7 @@ export default function NicheSolutions() {
     },
     {
       id: "automotriz",
-      icon: <Car className="h-5 w-5" />,
+      icon: Car,
       label: "Sector Automotriz (Lubricentros)",
       badge: "Talleres, Lubricentros, Serv. Técnicos",
       title: "Fichas digitales de vehículos e historiales",
@@ -89,7 +89,7 @@ export default function NicheSolutions() {
     },
     {
       id: "transporte",
-      icon: <Truck className="h-5 w-5" />,
+      icon: Truck,
       label: "Transporte & Logística",
       badge: "Flotas, Courier, Logística",
       title: "Control digital de flotas y hojas de despacho",
@@ -111,7 +111,7 @@ export default function NicheSolutions() {
     },
     {
       id: "educacion",
-      icon: <GraduationCap className="h-5 w-5" />,
+      icon: GraduationCap,
       label: "Instituciones & Colegios",
       badge: "Colegios, Institutos, Jardines",
       title: "Comunicación directa y control de inspectoría",
@@ -132,11 +132,11 @@ export default function NicheSolutions() {
       ctaHref: "#cotizar",
     },
   ];
-
+ 
   const currentNiche = niches.find((n) => n.id === activeTab) || niches[0];
-
+ 
   return (
-    <section id="nichos" className="py-20 bg-slate-50 border-b border-slate-200">
+    <section id="nichos" className="py-20 bg-slate-cold border-b border-slate-200">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         
         {/* Section Header */}
@@ -144,36 +144,43 @@ export default function NicheSolutions() {
           <h2 className="text-xs font-bold uppercase tracking-widest text-slate-400">
             Soluciones Especializadas
           </h2>
-          <p className="text-3xl font-extrabold text-slate-900 tracking-tight sm:text-4xl">
+          <p className="text-3xl font-extrabold text-primary tracking-tight sm:text-4xl">
             Software a Medida para tu Industria
           </p>
-          <p className="text-lg text-slate-600">
+          <p className="text-lg text-slate-605">
             Entendemos los desafíos únicos de cada sector. Diseñamos módulos que resuelven los problemas reales de tu rubro comercial.
           </p>
         </div>
-
+ 
         {/* Content Layout */}
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-start">
           
           {/* Left Panel: Tabs List */}
           <div className="lg:col-span-4 space-y-2.5">
-            {niches.map((niche) => {
+            {niches.map((niche, idx) => {
               const isActive = niche.id === activeTab;
+              const IconComp = niche.icon;
+              
+              // Inactive tabs icons alternate: 1st Verde, 2nd Azul, 3rd Verde...
+              const iconColorClass = isActive 
+                ? "text-accent" 
+                : (idx % 2 === 0 ? "text-accent" : "text-primary");
+              
               return (
                 <button
                   key={niche.id}
                   onClick={() => setActiveTab(niche.id)}
                   className={`w-full text-left p-4.5 rounded-2xl border transition-all duration-200 flex items-center justify-between group cursor-pointer ${
                     isActive
-                      ? "bg-white border-slate-300 shadow-md translate-x-1"
-                      : "bg-slate-50/50 border-slate-200 hover:bg-white hover:border-slate-300 hover:shadow-sm"
+                      ? "bg-white border-primary shadow-md translate-x-1"
+                      : "bg-slate-50/50 border-slate-200 hover:bg-white hover:border-accent hover:shadow-sm"
                   }`}
                 >
                   <div className="flex items-center space-x-3.5">
                     <div className={`p-2.5 rounded-xl border flex items-center justify-center transition-colors ${
-                      isActive ? "bg-slate-900 text-white border-slate-800" : "bg-white text-slate-500 border-slate-250 group-hover:text-slate-900"
+                      isActive ? "bg-primary text-accent border-primary" : "bg-white border-slate-250 group-hover:border-slate-350"
                     }`}>
-                      {niche.icon}
+                      <IconComp className="h-5 w-5" />
                     </div>
                     <div>
                       <span className="text-sm font-extrabold block text-slate-800 leading-tight">
@@ -188,48 +195,53 @@ export default function NicheSolutions() {
               );
             })}
           </div>
-
+ 
           {/* Right Panel: Tab Content Display */}
-          <div className="lg:col-span-8 silver-metallic-card rounded-3xl p-6 sm:p-10 shadow-lg border-slate-200 flex flex-col md:flex-row gap-8 min-h-[420px] animate-fade-in">
+          <div className="lg:col-span-8 bg-primary text-white rounded-3xl p-6 sm:p-10 shadow-2xl border border-primary-light flex flex-col md:flex-row gap-8 min-h-[420px] animate-fade-in">
             
             {/* Left side: Information */}
             <div className="flex-1 flex flex-col justify-between space-y-6">
               <div className="space-y-4">
-                <span className="bg-slate-100 border border-slate-250 text-slate-700 text-[10px] font-black uppercase tracking-wider px-2.5 py-1 rounded">
+                <span className="bg-primary-light/45 border border-primary-light/60 text-slate-200 text-[10px] font-black uppercase tracking-wider px-2.5 py-1 rounded">
                   Solución {currentNiche.label.split(" ")[0]}
                 </span>
                 
-                <h3 className="text-xl sm:text-2xl font-bold text-slate-900 leading-tight">
+                <h3 className="text-xl sm:text-2xl font-bold text-white leading-tight">
                   {currentNiche.title}
                 </h3>
                 
-                <p className="text-sm text-slate-600 leading-relaxed">
+                <p className="text-sm text-slate-300 leading-relaxed">
                   {currentNiche.desc}
                 </p>
-
+ 
                 <ul className="space-y-2.5 pt-2">
-                  {currentNiche.features.map((feature, fIdx) => (
-                    <li key={fIdx} className="flex items-start space-x-2.5 text-xs text-slate-600">
-                      <CheckCircle2 className="h-4.5 w-4.5 text-slate-400 shrink-0 mt-0.5" />
-                      <span>{feature}</span>
-                    </li>
-                  ))}
+                  {currentNiche.features.map((feature, fIdx) => {
+                    // Alternate checkmark icons inside the dark card
+                    const checkColor = fIdx % 2 === 0 ? "text-accent" : "text-gold";
+                    
+                    return (
+                      <li key={fIdx} className="flex items-start space-x-2.5 text-xs text-slate-200">
+                        <CheckCircle2 className={`h-4.5 w-4.5 shrink-0 mt-0.5 ${checkColor}`} />
+                        <span>{feature}</span>
+                      </li>
+                    );
+                  })}
                 </ul>
               </div>
-
+ 
               <div>
                 <a
                   href={currentNiche.ctaHref}
-                  className="inline-flex items-center space-x-2 bg-slate-950 text-white hover:bg-slate-900 px-6 py-3.5 rounded-xl text-sm font-bold border border-slate-800 hover:border-slate-750 shadow-sm transition-all group duration-250"
+                  className="inline-flex items-center space-x-2 bg-accent text-primary hover:bg-emerald-400 px-6 py-3.5 rounded-xl text-sm font-bold shadow-md transition-all group duration-250"
                 >
-                  <MessageSquare className="h-4.5 w-4.5 text-green-400" />
+                  <MessageSquare className="h-4.5 w-4.5 text-primary" />
                   <span>{currentNiche.ctaText}</span>
                 </a>
               </div>
             </div>
-
+ 
             {/* Right side: Mockup Display */}
-            <div className="w-full md:w-[260px] bg-slate-900 border border-slate-950 rounded-2xl p-4 flex flex-col justify-between shrink-0 shadow-inner select-none font-sans">
+            <div className="w-full md:w-[260px] bg-slate-950/80 border border-primary-light/40 rounded-2xl p-4 flex flex-col justify-between shrink-0 shadow-inner select-none font-sans">
               
               {/* Mockup Header */}
               <div className="flex justify-between items-center pb-2.5 border-b border-slate-800">
@@ -239,40 +251,40 @@ export default function NicheSolutions() {
                     {currentNiche.mockupTitle}
                   </span>
                 </div>
-                <span className="h-2 w-2 rounded-full bg-green-500 animate-pulse" />
+                <span className="h-2 w-2 rounded-full bg-accent animate-pulse" />
               </div>
-
+ 
               {/* Mockup Items */}
               <div className="py-6 space-y-3.5 flex-grow flex flex-col justify-center">
                 {currentNiche.mockupItems.map((item, idx) => (
-                  <div key={idx} className="bg-slate-850 p-2.5 rounded-lg border border-slate-800 flex justify-between items-center">
+                  <div key={idx} className="bg-slate-900/60 p-2.5 rounded-lg border border-slate-800 flex justify-between items-center">
                     <span className="text-[10px] text-slate-300 font-semibold truncate max-w-[140px]">
                       {item.label}
                     </span>
                     <span className={`text-[8.5px] font-bold uppercase px-2 py-0.5 rounded ${
                       item.status === "success"
-                        ? "bg-green-950/80 text-green-400 border border-green-900/50"
+                        ? "bg-accent/15 text-accent border border-accent/25"
                         : item.status === "warning"
-                        ? "bg-amber-950/80 text-amber-400 border border-amber-900/50"
-                        : "bg-slate-800 text-slate-300"
+                        ? "bg-gold/15 text-gold border border-gold/25"
+                        : "bg-slate-800 text-slate-350 border border-slate-700"
                     }`}>
                       {item.value}
                     </span>
                   </div>
                 ))}
               </div>
-
+ 
               {/* Mockup Footer */}
               <div className="pt-2 border-t border-slate-800 flex justify-between items-center text-[8px] text-slate-500">
                 <span>Último Sync: hace 2s</span>
                 <span className="font-bold text-slate-400">100% cloud</span>
               </div>
-
+ 
             </div>
-
+ 
           </div>
         </div>
-
+ 
       </div>
     </section>
   );

@@ -35,7 +35,7 @@ export default function Header() {
               <a
                 key={link.name}
                 href={link.href}
-                className="text-sm font-medium text-slate-600 hover:text-slate-900 transition-colors"
+                className="text-sm font-medium text-slate-600 hover:text-primary transition-colors"
               >
                 {link.name}
               </a>
@@ -48,7 +48,7 @@ export default function Header() {
           <div className="flex md:hidden items-center">
             <button
               onClick={() => setIsOpen(!isOpen)}
-              className="inline-flex items-center justify-center p-2 rounded-md text-slate-600 hover:text-slate-900 hover:bg-slate-100 transition-colors focus:outline-none"
+              className="inline-flex items-center justify-center p-2 rounded-md text-slate-600 hover:text-primary hover:bg-slate-100 transition-colors focus:outline-none"
               aria-label="Abrir menú"
             >
               {isOpen ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
@@ -65,7 +65,7 @@ export default function Header() {
               key={link.name}
               href={link.href}
               onClick={() => setIsOpen(false)}
-              className="block px-3 py-2.5 rounded-lg text-base font-medium text-slate-700 hover:text-slate-900 hover:bg-slate-50 transition-colors"
+              className="block px-3 py-2.5 rounded-lg text-base font-medium text-slate-700 hover:text-primary hover:bg-slate-50 transition-colors"
             >
               {link.name}
             </a>

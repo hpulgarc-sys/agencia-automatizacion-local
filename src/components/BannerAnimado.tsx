@@ -40,23 +40,23 @@ export default function BannerAnimado() {
             <h2 className="text-base sm:text-lg font-bold text-slate-500 leading-none tracking-wider uppercase">
               TU SOCIO EN
             </h2>
-            <h1 className="text-2xl sm:text-3xl md:text-3.5xl font-black text-[#002d59] leading-tight tracking-tight uppercase">
+            <h1 className="text-2xl sm:text-3xl md:text-3.5xl font-black text-primary leading-tight tracking-tight uppercase">
               AUTOMATIZACIÓN LOCAL
             </h1>
             <h2 className="text-3xl sm:text-4xl md:text-4.5xl font-black text-slate-700 leading-none tracking-tight uppercase">
-              DESARROLLO <span className="text-[#003466]">WEB</span>
+              DESARROLLO <span className="text-primary">WEB</span>
             </h2>
           </div>
 
           {/* Subtitles centered */}
           <div className="space-y-1 py-1 text-center">
-            <p className="text-[10px] font-bold text-[#002d59] tracking-wider uppercase">
+            <p className="text-[10px] font-bold text-primary tracking-wider uppercase">
               DIGITALIZAMOS TUS PROCESOS
             </p>
-            <p className="text-[10px] font-bold text-[#002d59] tracking-wider uppercase">
+            <p className="text-[10px] font-bold text-primary tracking-wider uppercase">
               ELIMINAMOS EL PAPEL
             </p>
-            <p className="text-[10px] font-bold text-[#002d59] tracking-wider uppercase">
+            <p className="text-[10px] font-bold text-primary tracking-wider uppercase">
               MÁS TIEMPO PARA CRECER
             </p>
           </div>
@@ -69,10 +69,10 @@ export default function BannerAnimado() {
               rel="noopener noreferrer"
               className="inline-flex items-center space-x-3 group transition-transform duration-200 active:scale-95"
             >
-              <div className="flex items-center justify-center h-11 w-11 rounded-full bg-[#00cc44] text-white shadow-md group-hover:bg-[#00b33c] transition-colors duration-200 shrink-0">
+              <div className="flex items-center justify-center h-11 w-11 rounded-full bg-accent text-white shadow-md hover:bg-emerald-400 transition-colors duration-200 shrink-0">
                 <ArrowRight className="h-5 w-5" />
               </div>
-              <div className="bg-[#003466] hover:bg-[#00254d] text-white font-extrabold text-xs tracking-widest px-7 py-3.5 rounded-full shadow-md transition-colors duration-200 uppercase">
+              <div className="bg-primary hover:bg-navy-light text-white font-extrabold text-xs tracking-widest px-7 py-3.5 rounded-full shadow-md transition-colors duration-200 uppercase">
                 SOLICITAR DEMO
               </div>
             </a>
@@ -84,7 +84,7 @@ export default function BannerAnimado() {
       </div>
 
       {/* Blue side (Right Column) */}
-      <div className="w-full md:w-[50%] bg-[#002a5c] text-white flex flex-col justify-center items-center p-8 md:p-12 md:pl-20 z-10 md:absolute md:right-0 md:top-0 md:h-full md:rounded-l-[220px] lg:rounded-l-[260px] md:border-l-8 md:border-[#00cc44] relative overflow-hidden text-center">
+      <div className="w-full md:w-[50%] bg-primary text-white flex flex-col justify-center items-center p-8 md:p-12 md:pl-20 z-10 md:absolute md:right-0 md:top-0 md:h-full md:rounded-l-[220px] lg:rounded-l-[260px] md:border-l-8 md:border-accent relative overflow-hidden text-center">
         
         {/* Soft overlay lines on blue */}
         <div className="absolute inset-0 bg-[url('/banner.svg')] bg-cover bg-center opacity-[0.04] pointer-events-none" />
@@ -94,7 +94,7 @@ export default function BannerAnimado() {
             <span className="text-[10px] font-bold text-slate-300 uppercase tracking-widest block">
               NUESTRAS
             </span>
-            <h3 className="text-2xl sm:text-3xl font-black text-[#00cc44] tracking-wide uppercase">
+            <h3 className="text-2xl sm:text-3xl font-black text-accent tracking-wide uppercase">
               SOLUCIONES
             </h3>
           </div>
@@ -102,7 +102,7 @@ export default function BannerAnimado() {
           <ul className="text-left space-y-3 max-w-[280px]">
             {solutions.map((sol, index) => (
               <li key={index} className="flex items-start space-x-3 text-xs sm:text-sm font-medium">
-                <div className="h-2 w-2 rounded-full bg-[#00cc44] mt-1.5 shrink-0" />
+                <div className="h-2 w-2 rounded-full bg-accent mt-1.5 shrink-0" />
                 <span>{sol}</span>
               </li>
             ))}

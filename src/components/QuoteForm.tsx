@@ -95,16 +95,16 @@ export default function QuoteForm() {
           <h2 className="text-xs font-bold uppercase tracking-widest text-slate-400">
             Agenda tu Demo
           </h2>
-          <p className="text-3xl font-extrabold text-slate-900 tracking-tight sm:text-4xl">
+          <p className="text-3xl font-extrabold text-primary tracking-tight sm:text-4xl">
             Solicita una Demo Presencial en tu Local
           </p>
-          <p className="text-base text-slate-600">
+          <p className="text-base text-slate-650">
             Completa los datos de tu negocio y coordinemos una visita presencial en la Región de O&apos;Higgins para mostrarte el sistema funcionando en vivo.
           </p>
         </div>
-
+ 
         {/* Form Container */}
-        <div className="silver-metallic-card rounded-2xl p-6 sm:p-10 silver-glow border-slate-200">
+        <div className="bg-white rounded-2xl p-6 sm:p-10 shadow-xl border border-slate-200">
           <form onSubmit={handleSubmit} className="space-y-6">
             
             {error && (
@@ -113,7 +113,7 @@ export default function QuoteForm() {
                 <span>{error}</span>
               </div>
             )}
-
+ 
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
               
               {/* Business Name */}
@@ -128,11 +128,11 @@ export default function QuoteForm() {
                   value={formData.businessName}
                   onChange={handleInputChange}
                   placeholder="Ej. Restaurant El Estribo, Taller O'Higgins"
-                  className="w-full bg-slate-50 border border-slate-200 rounded-xl px-4 py-3 text-sm text-slate-800 placeholder-slate-400 focus:outline-none focus:bg-white focus:ring-2 focus:ring-slate-350 focus:border-slate-350 transition-all"
+                  className="w-full bg-slate-cold border border-slate-200 rounded-xl px-4 py-3 text-sm text-slate-800 placeholder-slate-400 focus:outline-none focus:bg-white focus:ring-2 focus:ring-primary/50 focus:border-primary transition-all"
                   required
                 />
               </div>
-
+ 
               {/* City (Select O'Higgins Communes) */}
               <div className="space-y-2">
                 <label htmlFor="city" className="text-xs font-bold uppercase tracking-wide text-slate-600 block">
@@ -143,7 +143,7 @@ export default function QuoteForm() {
                   name="city"
                   value={formData.city}
                   onChange={handleInputChange}
-                  className="w-full bg-slate-50 border border-slate-200 rounded-xl px-4 py-3 text-sm text-slate-800 focus:outline-none focus:bg-white focus:ring-2 focus:ring-slate-350 focus:border-slate-350 transition-all appearance-none cursor-pointer"
+                  className="w-full bg-slate-cold border border-slate-200 rounded-xl px-4 py-3 text-sm text-slate-800 focus:outline-none focus:bg-white focus:ring-2 focus:ring-primary/50 focus:border-primary transition-all appearance-none cursor-pointer"
                   required
                 >
                   <option value="" disabled>Selecciona tu comuna</option>
@@ -154,7 +154,7 @@ export default function QuoteForm() {
                   ))}
                 </select>
               </div>
-
+ 
               {/* Service of Interest */}
               <div className="space-y-2 sm:col-span-2">
                 <label htmlFor="service" className="text-xs font-bold uppercase tracking-wide text-slate-600 block">
@@ -165,7 +165,7 @@ export default function QuoteForm() {
                   name="service"
                   value={formData.service}
                   onChange={handleInputChange}
-                  className="w-full bg-slate-50 border border-slate-200 rounded-xl px-4 py-3 text-sm text-slate-800 focus:outline-none focus:bg-white focus:ring-2 focus:ring-slate-350 focus:border-slate-350 transition-all appearance-none cursor-pointer"
+                  className="w-full bg-slate-cold border border-slate-200 rounded-xl px-4 py-3 text-sm text-slate-800 focus:outline-none focus:bg-white focus:ring-2 focus:ring-primary/50 focus:border-primary transition-all appearance-none cursor-pointer"
                   required
                 >
                   <option value="" disabled>Selecciona el servicio</option>
@@ -176,7 +176,7 @@ export default function QuoteForm() {
                   ))}
                 </select>
               </div>
-
+ 
               {/* Message / Details */}
               <div className="space-y-2 sm:col-span-2">
                 <label htmlFor="details" className="text-xs font-bold uppercase tracking-wide text-slate-600 block">
@@ -189,53 +189,53 @@ export default function QuoteForm() {
                   value={formData.details}
                   onChange={handleInputChange}
                   placeholder="Cuéntanos un poco más sobre lo que necesitas (ej. cantidad de mesas en tu local, volumen de tickets diarios, etc.)"
-                  className="w-full bg-slate-50 border border-slate-200 rounded-xl px-4 py-3 text-sm text-slate-800 placeholder-slate-400 focus:outline-none focus:bg-white focus:ring-2 focus:ring-slate-350 focus:border-slate-350 transition-all resize-y"
+                  className="w-full bg-slate-cold border border-slate-200 rounded-xl px-4 py-3 text-sm text-slate-800 placeholder-slate-400 focus:outline-none focus:bg-white focus:ring-2 focus:ring-primary/50 focus:border-primary transition-all resize-y"
                 />
               </div>
-
+ 
             </div>
-
+ 
             {/* Submit Button */}
             <div className="pt-2">
               <button
                 type="submit"
-                className="w-full sm:w-auto inline-flex items-center justify-center space-x-2 bg-slate-950 text-white hover:bg-slate-900 px-8 py-4 rounded-xl text-base font-bold border border-slate-800 hover:border-slate-700 shadow-md hover:shadow-lg transition-all group duration-300 cursor-pointer"
+                className="w-full sm:w-auto inline-flex items-center justify-center space-x-2 bg-accent text-primary hover:bg-emerald-400 px-8 py-4 rounded-xl text-base font-bold shadow-md hover:shadow-lg transition-all group duration-300 cursor-pointer border-transparent"
               >
-                <MessageSquare className="h-5 w-5 text-green-400 group-hover:scale-110 transition-transform duration-300" />
+                <MessageSquare className="h-5 w-5 text-primary group-hover:scale-110 transition-transform duration-300" />
                 <span>Solicitar Demo Presencial por WhatsApp</span>
               </button>
             </div>
-
+ 
           </form>
         </div>
-
+ 
         {/* Local trust indicators */}
-        <div className="grid grid-cols-1 sm:grid-cols-3 gap-6 pt-12 text-center text-xs text-slate-500">
+        <div className="grid grid-cols-1 sm:grid-cols-3 gap-6 pt-12 text-center text-xs text-slate-555">
           <div className="flex flex-col items-center space-y-1.5">
-            <div className="p-2 bg-slate-100 rounded-full border border-slate-200">
-              <Check className="h-4.5 w-4.5 text-slate-600" />
+            <div className="p-2 bg-slate-cold rounded-full border border-slate-200 shadow-sm">
+              <Check className="h-4.5 w-4.5 text-accent" />
             </div>
             <p className="font-bold text-slate-800">Contacto Directo</p>
             <p>Atención rápida por WhatsApp sin intermediarios.</p>
           </div>
           
           <div className="flex flex-col items-center space-y-1.5">
-            <div className="p-2 bg-slate-100 rounded-full border border-slate-200">
-              <Check className="h-4.5 w-4.5 text-slate-600" />
+            <div className="p-2 bg-slate-cold rounded-full border border-slate-200 shadow-sm">
+              <Check className="h-4.5 w-4.5 text-primary" />
             </div>
             <p className="font-bold text-slate-800">100% Personalizado</p>
             <p>Adaptamos el software a la forma de trabajar de tu negocio.</p>
           </div>
           
           <div className="flex flex-col items-center space-y-1.5">
-            <div className="p-2 bg-slate-100 rounded-full border border-slate-200">
-              <Check className="h-4.5 w-4.5 text-slate-600" />
+            <div className="p-2 bg-slate-cold rounded-full border border-slate-200 shadow-sm">
+              <Check className="h-4.5 w-4.5 text-accent" />
             </div>
             <p className="font-bold text-slate-800">Implementación Presencial</p>
             <p>Apoyamos a tu equipo en la Región de O&apos;Higgins.</p>
           </div>
         </div>
-
+ 
       </div>
     </section>
   );
