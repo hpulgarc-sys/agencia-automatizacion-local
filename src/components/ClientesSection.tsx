@@ -58,43 +58,65 @@ export default function ClientesSection() {
             return (
               <div
                 key={cliente.id}
-                className={`bg-white/70 backdrop-blur-sm border border-slate-200 rounded-2xl p-6 flex flex-col justify-between items-center text-center shadow-sm hover:shadow-lg transition-all duration-300 ${hoverBorderClass} group`}
+                className={`bg-white/80 border border-slate-200 rounded-2xl p-6 flex flex-col justify-between items-center text-center shadow-sm hover:shadow-lg transition-all duration-300 ${hoverBorderClass} group`}
               >
                 {/* Logo or Visual representation */}
                 {cliente.logoUrl ? (
-                  <div className="w-full h-16 relative flex items-center justify-center mb-4 group-hover:scale-105 transition-transform duration-300">
+                  <div className="w-full h-20 md:h-24 relative flex items-center justify-center mb-4 group-hover:scale-105 transition-transform duration-300">
                     <Image
                       src={cliente.logoUrl}
                       alt={`Logo de ${cliente.nombre}`}
-                      width={100}
-                      height={40}
-                      className="h-12 w-auto object-contain rounded-lg"
+                      width={150}
+                      height={60}
+                      className="h-16 md:h-20 w-auto object-contain rounded-lg"
                     />
                   </div>
                 ) : (
-                  <div className="w-16 h-16 rounded-full bg-slate-cold border border-slate-100 flex items-center justify-center mb-4 group-hover:scale-105 transition-transform duration-300">
-                    <span className="text-xl font-black text-primary group-hover:text-accent transition-colors">
-                      {cliente.nombre.charAt(0)}
+                  <div className="w-full min-h-[5rem] md:min-h-[6rem] flex flex-col justify-center items-center mb-4 p-2 bg-slate-cold/50 rounded-xl border border-slate-100 group-hover:bg-slate-cold transition-all duration-300">
+                    <span className="font-black tracking-tight text-lg md:text-xl text-primary leading-none text-center">
+                      {cliente.nombre}
                     </span>
+                    {cliente.comuna && (
+                      <span className={`inline-flex items-center text-[9px] font-black uppercase tracking-wider px-2 py-0.5 mt-2 rounded border ${
+                        idx % 2 === 0
+                          ? "bg-accent/10 border-accent/30 text-emerald-800"
+                          : "bg-primary/10 border-primary/30 text-primary"
+                      }`}>
+                        {cliente.comuna}
+                      </span>
+                    )}
                   </div>
                 )}
  
-                <div className="space-y-2 flex-grow flex flex-col justify-center">
-                  <h3 className="font-extrabold text-sm text-primary tracking-tight leading-snug">
-                    {cliente.nombre}
-                  </h3>
-                  <p className="text-[10px] font-bold text-slate-400 uppercase tracking-wider">
-                    {cliente.rubro}
-                  </p>
-                  {cliente.descripcion && (
-                    <p className="text-[11px] text-slate-500 leading-snug font-medium line-clamp-3">
-                      {cliente.descripcion}
-                    </p>
-                  )}
-                  {cliente.comuna && (
-                    <p className="text-[10px] text-slate-400 font-medium mt-auto pt-1">
-                      {cliente.comuna}, Región de O&apos;Higgins
-                    </p>
+                <div className="space-y-2 flex-grow flex flex-col justify-center w-full">
+                  {cliente.logoUrl ? (
+                    <>
+                      <h3 className="font-extrabold text-sm text-primary tracking-tight leading-snug">
+                        {cliente.nombre}
+                      </h3>
+                      <p className="text-[10px] font-bold text-slate-400 uppercase tracking-wider">
+                        {cliente.rubro}
+                      </p>
+                      {cliente.descripcion && (
+                        <p className="text-[11px] text-slate-550 leading-snug font-medium line-clamp-3">
+                          {cliente.descripcion}
+                        </p>
+                      )}
+                      {cliente.comuna && (
+                        <p className="text-[10px] text-slate-400 font-medium mt-auto pt-1">
+                          {cliente.comuna}, Región de O&apos;Higgins
+                        </p>
+                      )}
+                    </>
+                  ) : (
+                    <>
+                      <p className="text-[10px] font-bold text-slate-400 uppercase tracking-wider">
+                        {cliente.rubro}
+                      </p>
+                      <p className="text-[11px] text-slate-500 leading-snug font-medium">
+                        Digitalización de procesos comerciales y puesta en marcha presencial.
+                      </p>
+                    </>
                   )}
                 </div>
               </div>
