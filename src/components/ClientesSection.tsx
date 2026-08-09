@@ -21,10 +21,17 @@ const CLIENTES: Cliente[] = [
     logoUrl: "/clientes/smashpoint.png",
     comuna: "Rancagua"
   },
+  {
+    id: "armatubowl",
+    nombre: "Arma Tu Bowl",
+    rubro: "Gastronomía / Menú Digital & KDS",
+    descripcion: "Comandas digitales en tiempo real, integración de menú interactivo por QR y gestión automatizada de pedidos para cocina.",
+    logoUrl: "/clientes/armatubowl.png",
+    comuna: "Rancagua"
+  },
   { id: 1, nombre: "Restobar El Estribo", rubro: "Gastronomía & Menú QR", comuna: "San Vicente" },
   { id: 2, nombre: "Barbería Central", rubro: "Estética & Agenda Online", comuna: "Rancagua" },
   { id: 3, nombre: "Lubricentro O'Higgins", rubro: "Ficha Digital Automotriz", comuna: "San Fernando" },
-  { id: 4, nombre: "Minimarket Express", rubro: "Control de Ventas", comuna: "Machalí" },
 ];
  
 export default function ClientesSection() {
