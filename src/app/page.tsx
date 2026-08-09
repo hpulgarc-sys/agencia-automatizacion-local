@@ -1,6 +1,7 @@
 import Header from "@/components/Header";
 import Hero from "@/components/Hero";
 import Services from "@/components/Services";
+import ClientesSection from "@/components/ClientesSection";
 import NicheSolutions from "@/components/NicheSolutions";
 import BannerAnimado from "@/components/BannerAnimado";
 import Demos from "@/components/Demos";
@@ -9,7 +10,7 @@ import NosotrosSection from "@/components/NosotrosSection";
 import QuoteForm from "@/components/QuoteForm";
 import FloatingWhatsApp from "@/components/FloatingWhatsApp";
 import Footer from "@/components/Footer";
-
+ 
 export default function Home() {
   return (
     <>
@@ -18,6 +19,7 @@ export default function Home() {
         <BannerAnimado />
         <Hero />
         <Services />
+        <ClientesSection />
         <NicheSolutions />
         <Demos />
         <TurnkeyKit />
