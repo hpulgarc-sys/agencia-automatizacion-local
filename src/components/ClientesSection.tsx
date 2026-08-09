@@ -1,21 +1,30 @@
 "use client";
  
+import Image from "next/image";
 import { MessageSquare } from "lucide-react";
  
 interface Cliente {
-  id: number;
+  id: string | number;
   nombre: string;
   rubro: string;
-  comuna: string;
+  comuna?: string;
+  descripcion?: string;
   logoUrl?: string;
 }
  
 const CLIENTES: Cliente[] = [
+  {
+    id: "smashpoint",
+    nombre: "SmashPoint",
+    rubro: "Complejo Deportivo & Pádel",
+    descripcion: "Gestión inteligente de reservas 24/7, agendamiento de canchas y automatización de avisos por WhatsApp.",
+    logoUrl: "/clientes/smashpoint.png",
+    comuna: "Rancagua"
+  },
   { id: 1, nombre: "Restobar El Estribo", rubro: "Gastronomía & Menú QR", comuna: "San Vicente" },
   { id: 2, nombre: "Barbería Central", rubro: "Estética & Agenda Online", comuna: "Rancagua" },
   { id: 3, nombre: "Lubricentro O'Higgins", rubro: "Ficha Digital Automotriz", comuna: "San Fernando" },
   { id: 4, nombre: "Minimarket Express", rubro: "Control de Ventas", comuna: "Machalí" },
-  { id: 5, nombre: "Transporte Colchagua", rubro: "Hojas de Ruta Digitales", comuna: "Santa Cruz" },
 ];
  
 export default function ClientesSection() {
@@ -51,23 +60,42 @@ export default function ClientesSection() {
                 key={cliente.id}
                 className={`bg-white/70 backdrop-blur-sm border border-slate-200 rounded-2xl p-6 flex flex-col justify-between items-center text-center shadow-sm hover:shadow-lg transition-all duration-300 ${hoverBorderClass} group`}
               >
-                {/* Visual Representation of Client Logo (since we don't have images) */}
-                <div className="w-16 h-16 rounded-full bg-slate-cold border border-slate-100 flex items-center justify-center mb-4 group-hover:scale-105 transition-transform duration-300">
-                  <span className="text-xl font-black text-primary group-hover:text-accent transition-colors">
-                    {cliente.nombre.charAt(0)}
-                  </span>
-                </div>
+                {/* Logo or Visual representation */}
+                {cliente.logoUrl ? (
+                  <div className="w-full h-16 relative flex items-center justify-center mb-4 group-hover:scale-105 transition-transform duration-300">
+                    <Image
+                      src={cliente.logoUrl}
+                      alt={`Logo de ${cliente.nombre}`}
+                      width={100}
+                      height={40}
+                      className="h-12 w-auto object-contain rounded-lg"
+                    />
+                  </div>
+                ) : (
+                  <div className="w-16 h-16 rounded-full bg-slate-cold border border-slate-100 flex items-center justify-center mb-4 group-hover:scale-105 transition-transform duration-300">
+                    <span className="text-xl font-black text-primary group-hover:text-accent transition-colors">
+                      {cliente.nombre.charAt(0)}
+                    </span>
+                  </div>
+                )}
  
-                <div className="space-y-1">
+                <div className="space-y-2 flex-grow flex flex-col justify-center">
                   <h3 className="font-extrabold text-sm text-primary tracking-tight leading-snug">
                     {cliente.nombre}
                   </h3>
-                  <p className="text-[11px] font-bold text-slate-400 uppercase tracking-wider">
+                  <p className="text-[10px] font-bold text-slate-400 uppercase tracking-wider">
                     {cliente.rubro}
                   </p>
-                  <p className="text-[10px] text-slate-550 font-medium">
-                    {cliente.comuna}, Región de O&apos;Higgins
-                  </p>
+                  {cliente.descripcion && (
+                    <p className="text-[11px] text-slate-500 leading-snug font-medium line-clamp-3">
+                      {cliente.descripcion}
+                    </p>
+                  )}
+                  {cliente.comuna && (
+                    <p className="text-[10px] text-slate-400 font-medium mt-auto pt-1">
+                      {cliente.comuna}, Región de O&apos;Higgins
+                    </p>
+                  )}
                 </div>
               </div>
             );
