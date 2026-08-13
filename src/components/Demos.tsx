@@ -2,6 +2,7 @@
 
 import { useState, useEffect } from "react";
 import { ShoppingBag, ChefHat, CheckCircle2, RotateCcw, AlertCircle, Plus, Minus } from "lucide-react";
+import BarberBookingDemo from "./BarberBookingDemo";
 
 interface CartItem {
   id: string;
@@ -26,6 +27,7 @@ const MENU_ITEMS = [
 ];
 
 export default function Demos() {
+  const [demoTab, setDemoTab] = useState<"restaurante" | "barberia">("restaurante");
   const [cart, setCart] = useState<CartItem[]>([]);
   
   // Use a pure fixed date initialization or lazy state initializer
@@ -199,297 +201,362 @@ export default function Demos() {
   }, [orders]);
 
   const cartTotal = cart.reduce((acc, ci) => acc + ci.price * ci.quantity, 0);
-
+ 
   return (
     <section id="demos" className="py-20 bg-slate-cold border-b border-slate-200">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         
         {/* Section Header */}
-        <div className="text-center max-w-3xl mx-auto mb-12 space-y-4">
+        <div className="text-center max-w-3xl mx-auto mb-10 space-y-4">
           <h2 className="text-xs font-bold uppercase tracking-widest text-slate-400">
             Demos en Vivo
           </h2>
           <p className="text-3xl font-extrabold text-primary tracking-tight sm:text-4xl">
             Prueba el Sistema en Tiempo Real
           </p>
-          <p className="text-lg text-slate-650">
-            Haz un pedido simulado en la demo de la izquierda (Menú de Bowls) y observa cómo entra instantáneamente en el Monitor de Cocina (KDS) de la derecha.
-          </p>
           
+          {demoTab === "restaurante" ? (
+            <>
+              <p className="text-base text-slate-650 max-w-2xl mx-auto">
+                Haz un pedido simulado en la demo de la izquierda (Menú de Bowls) y observa cómo entra instantáneamente en el Monitor de Cocina (KDS) de la derecha.
+              </p>
+              <button
+                onClick={handleResetSimulator}
+                className="inline-flex items-center space-x-1.5 text-xs font-semibold text-slate-500 hover:text-primary border border-slate-200 hover:border-primary bg-white px-3 py-1.5 rounded-lg shadow-sm transition-all cursor-pointer"
+              >
+                <RotateCcw className="h-3 w-3" />
+                <span>Reiniciar Simulador</span>
+              </button>
+            </>
+          ) : (
+            <p className="text-base text-slate-650 max-w-2xl mx-auto">
+              Prueba el agendamiento digital interactivo. Selecciona un servicio, elige día y hora, y confirma la cita para ver el flujo en vivo.
+            </p>
+          )}
+        </div>
+ 
+        {/* Demo Selector Tabs */}
+        <div className="flex justify-center space-x-2.5 mb-12 max-w-md mx-auto bg-slate-200/50 p-1 rounded-xl border border-slate-250/20">
           <button
-            onClick={handleResetSimulator}
-            className="inline-flex items-center space-x-1.5 text-xs font-semibold text-slate-500 hover:text-primary border border-slate-200 hover:border-primary bg-white px-3 py-1.5 rounded-lg shadow-sm transition-all cursor-pointer"
+            onClick={() => setDemoTab("restaurante")}
+            className={`flex-1 py-2.5 rounded-lg text-xs font-bold tracking-tight transition-all duration-200 cursor-pointer ${
+              demoTab === "restaurante"
+                ? "bg-primary text-white shadow-sm border-transparent"
+                : "text-slate-600 hover:text-primary"
+            }`}
           >
-            <RotateCcw className="h-3 w-3" />
-            <span>Reiniciar Simulador</span>
+            🍔 Menú & Cocina (KDS)
+          </button>
+          <button
+            onClick={() => setDemoTab("barberia")}
+            className={`flex-1 py-2.5 rounded-lg text-xs font-bold tracking-tight transition-all duration-200 cursor-pointer ${
+              demoTab === "barberia"
+                ? "bg-primary text-white shadow-sm border-transparent"
+                : "text-slate-600 hover:text-primary"
+            }`}
+          >
+            ✂️ Reserva de Citas
           </button>
         </div>
  
-        {/* Tab Toggle buttons for Mobile Layout */}
-        <div className="flex md:hidden justify-center space-x-2 mb-8 bg-slate-200/60 p-1.5 rounded-xl max-w-sm mx-auto">
-          <button
-            onClick={() => setViewMode("client")}
-            className={`flex-1 flex items-center justify-center space-x-1.5 py-2.5 rounded-lg text-xs font-bold transition-all cursor-pointer ${
-              viewMode === "client"
-                ? "bg-primary text-white shadow-sm"
-                : "text-slate-600 hover:text-primary"
-            }`}
-          >
-            <ShoppingBag className="h-3.5 w-3.5" />
-            <span>1. Menú Bowls (Cliente)</span>
-          </button>
-          <button
-            onClick={() => setViewMode("kitchen")}
-            className={`flex-1 flex items-center justify-center space-x-1.5 py-2.5 rounded-lg text-xs font-bold transition-all cursor-pointer ${
-              viewMode === "kitchen"
-                ? "bg-primary text-white shadow-sm"
-                : "text-slate-600 hover:text-primary"
-            }`}
-          >
-            <ChefHat className="h-3.5 w-3.5" />
-            <span>2. Monitor KDS (Cocina)</span>
-            {orders.filter((o) => o.status === "Preparando").length > 0 && (
-              <span className="bg-accent text-primary text-[9px] px-1.5 py-0.5 rounded-full shrink-0 font-black animate-pulse">
-                {orders.filter((o) => o.status === "Preparando").length}
+        {demoTab === "restaurante" ? (
+          <>
+            {/* Tab Toggle buttons for Mobile Layout */}
+            <div className="flex md:hidden justify-center space-x-2 mb-8 bg-slate-200/60 p-1.5 rounded-xl max-w-sm mx-auto">
+              <button
+                onClick={() => setViewMode("client")}
+                className={`flex-1 flex items-center justify-center space-x-1.5 py-2.5 rounded-lg text-xs font-bold transition-all cursor-pointer ${
+                  viewMode === "client"
+                    ? "bg-primary text-white shadow-sm"
+                    : "text-slate-600 hover:text-primary"
+                }`}
+              >
+                <ShoppingBag className="h-3.5 w-3.5" />
+                <span>1. Menú Bowls (Cliente)</span>
+              </button>
+              <button
+                onClick={() => setViewMode("kitchen")}
+                className={`flex-1 flex items-center justify-center space-x-1.5 py-2.5 rounded-lg text-xs font-bold transition-all cursor-pointer ${
+                  viewMode === "kitchen"
+                    ? "bg-primary text-white shadow-sm"
+                    : "text-slate-600 hover:text-primary"
+                }`}
+              >
+                <ChefHat className="h-3.5 w-3.5" />
+                <span>2. Monitor KDS (Cocina)</span>
+                {orders.filter((o) => o.status === "Preparando").length > 0 && (
+                  <span className="bg-accent text-primary text-[9px] px-1.5 py-0.5 rounded-full shrink-0 font-black animate-pulse">
+                    {orders.filter((o) => o.status === "Preparando").length}
+                  </span>
+                )}
+              </button>
+            </div>
+ 
+            {/* Main Simulator Grid */}
+            <div className="grid grid-cols-1 md:grid-cols-12 gap-8 lg:gap-12 items-start">
+              
+              {/* Lado A: Client Mobile View */}
+              <div className={`md:col-span-5 ${viewMode === "client" ? "block" : "hidden md:block"}`}>
+                <h3 className="text-center font-bold text-primary text-sm mb-3 uppercase tracking-wider hidden md:block">
+                  📱 Vista de Cliente (Menú Digital)
+                </h3>
+                
+                {/* Phone Mockup Frame */}
+                <div className="relative mx-auto max-w-[340px] border-[10px] border-primary rounded-[36px] bg-white shadow-2xl overflow-hidden aspect-[9/18] flex flex-col">
+                  
+                  {/* Phone Header / Status Bar */}
+                  <div className="bg-primary text-white h-7 flex items-center justify-between px-6 text-[10px] select-none font-medium shrink-0">
+                    <span>12:30</span>
+                    <div className="w-16 h-4 bg-slate-950 rounded-full flex items-center justify-center border border-slate-800 shrink-0">
+                      <div className="w-2 h-2 rounded-full bg-slate-700" />
+                    </div>
+                    <span>100% 🔋</span>
+                  </div>
+ 
+                  {/* In-App Brand Header */}
+                  <div className="bg-slate-cold border-b border-slate-150 px-4 py-3 shrink-0 flex items-center justify-between">
+                    <div>
+                      <h4 className="text-xs font-bold text-primary uppercase tracking-tight">BOWLS HEALTHY LOCAL</h4>
+                      <span className="text-[9px] text-slate-400 font-medium">Región de O&apos;Higgins</span>
+                    </div>
+                    <span className="bg-accent/15 border border-accent/25 text-primary text-[8px] font-black px-1.5 py-0.5 rounded">
+                      QR ACTIVO
+                    </span>
+                  </div>
+ 
+                  {/* Phone Body (Menu list) */}
+                  <div className="flex-grow overflow-y-auto p-4 space-y-4">
+                    
+                    {orderSuccessMsg && (
+                      <div className="bg-primary text-white p-3 rounded-xl shadow-md border border-primary-light/50 flex items-start space-x-2 animate-bounce">
+                        <CheckCircle2 className="h-4 w-4 text-accent shrink-0 mt-0.5" />
+                        <div>
+                          <p className="text-[10px] font-bold">¡Pedido enviado a Cocina!</p>
+                          <p className="text-[9px] text-slate-300">Revisa el monitor KDS al costado.</p>
+                        </div>
+                      </div>
+                    )}
+ 
+                    <div className="space-y-3">
+                      <h5 className="text-[10px] font-bold text-slate-400 uppercase tracking-wider">Carta Digital</h5>
+                      
+                      {MENU_ITEMS.map((item) => (
+                        <div key={item.id} className="p-3 bg-slate-cold border border-slate-200/80 rounded-xl flex flex-col justify-between space-y-2.5">
+                          <div>
+                            <div className="flex justify-between items-start">
+                              <h6 className="text-[11px] font-bold text-primary">{item.name}</h6>
+                              <span className="text-[11px] font-bold text-primary">${item.price.toLocaleString("es-CL")}</span>
+                            </div>
+                            <p className="text-[9px] text-slate-550 leading-tight mt-1">{item.desc}</p>
+                          </div>
+                          
+                          <div className="flex justify-between items-center pt-1">
+                            {/* If in cart, show counter. Otherwise, show add button */}
+                            {cart.find((ci) => ci.id === item.id) ? (
+                              <div className="flex items-center space-x-2">
+                                <button
+                                  onClick={() => updateQuantity(item.id, -1)}
+                                  className="w-5 h-5 rounded-full bg-white border border-slate-200 hover:border-accent flex items-center justify-center text-primary hover:bg-slate-50 font-bold text-xs cursor-pointer"
+                                >
+                                  <Minus className="h-2.5 w-2.5" />
+                                </button>
+                                <span className="text-[10px] font-bold w-4 text-center">
+                                  {cart.find((ci) => ci.id === item.id)?.quantity}
+                                </span>
+                                <button
+                                  onClick={() => updateQuantity(item.id, 1)}
+                                  className="w-5 h-5 rounded-full bg-white border border-slate-200 hover:border-accent flex items-center justify-center text-primary hover:bg-slate-50 font-bold text-xs cursor-pointer"
+                                >
+                                  <Plus className="h-2.5 w-2.5" />
+                                </button>
+                              </div>
+                            ) : (
+                              <button
+                                onClick={() => addToCart(item)}
+                                className="bg-primary hover:bg-navy-light text-white hover:text-accent text-[9px] font-bold px-3 py-1.5 rounded-lg border border-transparent transition-colors ml-auto cursor-pointer"
+                              >
+                                Agregar al Bowl
+                              </button>
+                            )}
+                          </div>
+                        </div>
+                      ))}
+                    </div>
+ 
+                  </div>
+ 
+                  {/* Phone Footer (Cart Summary & Order button) */}
+                  <div className="bg-slate-cold border-t border-slate-200 p-4 shrink-0 space-y-3">
+                    <div className="flex justify-between items-center text-xs font-bold text-primary">
+                      <span>Total Pedido:</span>
+                      <span>${cartTotal.toLocaleString("es-CL")}</span>
+                    </div>
+ 
+                    <button
+                      disabled={cart.length === 0}
+                      onClick={handlePlaceOrder}
+                      className={`w-full py-3 rounded-xl text-center text-[11px] font-extrabold tracking-wide uppercase transition-all flex items-center justify-center space-x-1.5 border ${
+                        cart.length > 0
+                          ? "bg-accent text-primary border-transparent hover:bg-emerald-400 cursor-pointer shadow-sm"
+                          : "bg-slate-100 text-slate-400 border-slate-200 cursor-not-allowed"
+                      }`}
+                    >
+                      <ShoppingBag className="h-3.5 w-3.5" />
+                      <span>Enviar Pedido a Cocina</span>
+                    </button>
+                  </div>
+ 
+                </div>
+              </div>
+ 
+              {/* Lado B: Kitchen KDS Monitor View */}
+              <div className={`md:col-span-7 ${viewMode === "kitchen" ? "block" : "hidden md:block"}`}>
+                <h3 className="text-center font-bold text-primary text-sm mb-3 uppercase tracking-wider hidden md:block">
+                  🖥️ Vista de Cocina (Monitor KDS)
+                </h3>
+                
+                {/* Tablet Mockup Frame */}
+                <div className="w-full bg-slate-950 rounded-[24px] p-3 sm:p-4 shadow-2xl border-4 border-primary aspect-[4/3] sm:aspect-[1.5] flex flex-col overflow-hidden min-h-[360px]">
+                  
+                  {/* KDS Header */}
+                  <div className="flex justify-between items-center pb-3 border-b border-slate-800 mb-4 shrink-0">
+                    <div className="flex items-center space-x-2">
+                      <span className="h-2.5 w-2.5 rounded-full bg-accent animate-ping" />
+                      <span className="h-2.5 w-2.5 absolute rounded-full bg-accent" />
+                      <h4 className="text-xs font-black text-white uppercase tracking-wider pl-4">
+                        Monitor de Cocina KDS
+                      </h4>
+                    </div>
+                    <div className="flex items-center space-x-2 text-[10px] text-slate-400">
+                      <span className="bg-slate-900 px-2 py-0.5 rounded border border-slate-800 font-bold">
+                        Región de O&apos;Higgins
+                      </span>
+                      <span>|</span>
+                      <span className="font-semibold text-accent">Online</span>
+                    </div>
+                  </div>
+ 
+                  {/* KDS Active Tickets Grid */}
+                  <div className="flex-grow overflow-x-auto pb-2 flex gap-4 items-start select-none">
+                    {orders.length === 0 ? (
+                      <div className="w-full h-full flex flex-col items-center justify-center text-slate-500 space-y-3 py-12">
+                        <AlertCircle className="h-8 w-8 text-slate-600 animate-pulse" />
+                        <p className="text-xs font-semibold">No hay comandas activas en la cocina.</p>
+                        <p className="text-[10px] text-slate-600">Envía un pedido desde la demo de Bowls en el celular.</p>
+                      </div>
+                    ) : (
+                      orders.map((order) => (
+                        <div
+                          key={order.id}
+                          className={`w-[190px] sm:w-[210px] shrink-0 rounded-xl border flex flex-col justify-between shadow-md transition-all duration-300 animate-fade-in ${
+                            order.status === "Listo"
+                              ? "bg-slate-900/60 border-slate-800 opacity-60"
+                              : "bg-white border-slate-350 shadow-md text-slate-800"
+                          }`}
+                        >
+                          {/* Ticket Header */}
+                          <div
+                            className={`p-3 rounded-t-xl flex justify-between items-center border-b ${
+                              order.status === "Listo"
+                                ? "bg-slate-900/40 border-slate-800 text-slate-400"
+                                : "bg-slate-cold border-slate-200 text-primary"
+                            }`}
+                          >
+                            <div>
+                              <span className="text-[11px] font-black">#ORDEN {order.orderNum}</span>
+                              <span className="text-[9px] block font-semibold text-slate-400">
+                                {elapsedTimes[order.id] || "Hace instantes"}
+                              </span>
+                            </div>
+                            <span
+                              className={`text-[9px] font-black uppercase px-2 py-0.5 rounded ${
+                                order.status === "Listo"
+                                  ? "bg-slate-800 text-slate-500"
+                                  : "bg-gold/15 text-gold border border-gold/25"
+                              }`}
+                            >
+                              {order.status}
+                            </span>
+                          </div>
+ 
+                          {/* Ticket Items */}
+                          <div className="p-3.5 flex-grow space-y-2 max-h-[140px] overflow-y-auto">
+                            {order.items.map((item, idx) => (
+                              <div key={idx} className="flex justify-between items-start text-[10.5px]">
+                                <span className={`font-semibold ${order.status === "Listo" ? "text-slate-500" : "text-slate-700"}`}>
+                                  <span className="font-black text-primary bg-slate-cold border border-slate-250 px-1 rounded mr-1">
+                                    {item.quantity}x
+                                  </span>
+                                  {item.name}
+                                </span>
+                              </div>
+                            ))}
+                          </div>
+ 
+                          {/* Ticket Footer / Action */}
+                          <div className="p-3 border-t border-slate-100 bg-slate-cold rounded-b-xl flex flex-col space-y-2">
+                            <div className="flex justify-between items-center text-[10px] font-bold text-slate-500">
+                              <span>Total Pago:</span>
+                              <span className="text-primary font-black">${order.total.toLocaleString("es-CL")}</span>
+                            </div>
+                            
+                            {order.status === "Listo" ? (
+                              <button
+                                onClick={() => handleDismissOrder(order.id)}
+                                className="w-full py-1.5 bg-slate-200 border border-slate-300 hover:bg-slate-300 text-slate-700 rounded-lg text-[9px] font-bold tracking-wider uppercase transition-colors cursor-pointer"
+                              >
+                                Despachar Ticket
+                              </button>
+                            ) : (
+                              <button
+                                onClick={() => handleCompleteOrder(order.id)}
+                                className="w-full py-2 bg-accent hover:bg-emerald-400 text-primary border border-transparent rounded-lg text-[9px] font-bold tracking-wider uppercase transition-colors flex items-center justify-center space-x-1 cursor-pointer"
+                              >
+                                <CheckCircle2 className="h-3 w-3 text-primary" />
+                                <span>Marcar como Listo</span>
+                              </button>
+                            )}
+                          </div>
+                        </div>
+                      ))
+                    )}
+                  </div>
+ 
+                </div>
+              </div>
+ 
+            </div>
+          </>
+        ) : (
+          /* Lado C: Premium Barber Booking Widget */
+          <div className="flex flex-col items-center justify-center space-y-6 animate-fade-in">
+            <div className="text-center max-w-lg mb-2 space-y-2">
+              <span className="inline-flex bg-accent/15 border border-accent/25 text-primary text-[10px] font-black uppercase tracking-wider px-3 py-1 rounded-full shadow-sm">
+                Widget 100% Autónomo e Integrable
               </span>
-            )}
-          </button>
-        </div>
+              <p className="text-xs text-slate-500">
+                Simula el flujo completo de agendamiento online. Haz clic en el botón <strong className="text-amber-500">&apos;Obtener Código HTML&apos;</strong> en el widget para copiar la solución lista para tu WordPress o web a medida.
+              </p>
+            </div>
  
-        {/* Main Simulator Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-12 gap-8 lg:gap-12 items-start">
-          
-          {/* Lado A: Client Mobile View */}
-          <div className={`md:col-span-5 ${viewMode === "client" ? "block" : "hidden md:block"}`}>
-            <h3 className="text-center font-bold text-primary text-sm mb-3 uppercase tracking-wider hidden md:block">
-              📱 Vista de Cliente (Menú Digital)
-            </h3>
-            
-            {/* Phone Mockup Frame */}
-            <div className="relative mx-auto max-w-[340px] border-[10px] border-primary rounded-[36px] bg-white shadow-2xl overflow-hidden aspect-[9/18] flex flex-col">
+            {/* Phone Mockup Frame containing Barber booking widget */}
+            <div className="relative w-full max-w-[340px] border-[10px] border-primary rounded-[36px] bg-white shadow-2xl overflow-hidden flex flex-col min-h-[520px]">
               
               {/* Phone Header / Status Bar */}
               <div className="bg-primary text-white h-7 flex items-center justify-between px-6 text-[10px] select-none font-medium shrink-0">
-                <span>12:30</span>
+                <span>14:45</span>
                 <div className="w-16 h-4 bg-slate-950 rounded-full flex items-center justify-center border border-slate-800 shrink-0">
                   <div className="w-2 h-2 rounded-full bg-slate-700" />
                 </div>
                 <span>100% 🔋</span>
               </div>
  
-              {/* In-App Brand Header */}
-              <div className="bg-slate-cold border-b border-slate-150 px-4 py-3 shrink-0 flex items-center justify-between">
-                <div>
-                  <h4 className="text-xs font-bold text-primary uppercase tracking-tight">BOWLS HEALTHY LOCAL</h4>
-                  <span className="text-[9px] text-slate-400 font-medium">Región de O&apos;Higgins</span>
-                </div>
-                <span className="bg-accent/15 border border-accent/25 text-primary text-[8px] font-black px-1.5 py-0.5 rounded">
-                  QR ACTIVO
-                </span>
+              <div className="flex-grow overflow-y-auto bg-white flex flex-col justify-start">
+                <BarberBookingDemo />
               </div>
- 
-              {/* Phone Body (Menu list) */}
-              <div className="flex-grow overflow-y-auto p-4 space-y-4">
-                
-                {orderSuccessMsg && (
-                  <div className="bg-primary text-white p-3 rounded-xl shadow-md border border-primary-light/50 flex items-start space-x-2 animate-bounce">
-                    <CheckCircle2 className="h-4 w-4 text-accent shrink-0 mt-0.5" />
-                    <div>
-                      <p className="text-[10px] font-bold">¡Pedido enviado a Cocina!</p>
-                      <p className="text-[9px] text-slate-300">Revisa el monitor KDS al costado.</p>
-                    </div>
-                  </div>
-                )}
- 
-                <div className="space-y-3">
-                  <h5 className="text-[10px] font-bold text-slate-400 uppercase tracking-wider">Carta Digital</h5>
-                  
-                  {MENU_ITEMS.map((item) => (
-                    <div key={item.id} className="p-3 bg-slate-cold border border-slate-200/80 rounded-xl flex flex-col justify-between space-y-2.5">
-                      <div>
-                        <div className="flex justify-between items-start">
-                          <h6 className="text-[11px] font-bold text-primary">{item.name}</h6>
-                          <span className="text-[11px] font-bold text-primary">${item.price.toLocaleString("es-CL")}</span>
-                        </div>
-                        <p className="text-[9px] text-slate-550 leading-tight mt-1">{item.desc}</p>
-                      </div>
-                      
-                      <div className="flex justify-between items-center pt-1">
-                        {/* If in cart, show counter. Otherwise, show add button */}
-                        {cart.find((ci) => ci.id === item.id) ? (
-                          <div className="flex items-center space-x-2">
-                            <button
-                              onClick={() => updateQuantity(item.id, -1)}
-                              className="w-5 h-5 rounded-full bg-white border border-slate-200 hover:border-accent flex items-center justify-center text-primary hover:bg-slate-50 font-bold text-xs cursor-pointer"
-                            >
-                              <Minus className="h-2.5 w-2.5" />
-                            </button>
-                            <span className="text-[10px] font-bold w-4 text-center">
-                              {cart.find((ci) => ci.id === item.id)?.quantity}
-                            </span>
-                            <button
-                              onClick={() => updateQuantity(item.id, 1)}
-                              className="w-5 h-5 rounded-full bg-white border border-slate-200 hover:border-accent flex items-center justify-center text-primary hover:bg-slate-50 font-bold text-xs cursor-pointer"
-                            >
-                              <Plus className="h-2.5 w-2.5" />
-                            </button>
-                          </div>
-                        ) : (
-                          <button
-                            onClick={() => addToCart(item)}
-                            className="bg-primary hover:bg-navy-light text-white hover:text-accent text-[9px] font-bold px-3 py-1.5 rounded-lg border border-transparent transition-colors ml-auto cursor-pointer"
-                          >
-                            Agregar al Bowl
-                          </button>
-                        )}
-                      </div>
-                    </div>
-                  ))}
-                </div>
- 
-              </div>
- 
-              {/* Phone Footer (Cart Summary & Order button) */}
-              <div className="bg-slate-cold border-t border-slate-200 p-4 shrink-0 space-y-3">
-                <div className="flex justify-between items-center text-xs font-bold text-primary">
-                  <span>Total Pedido:</span>
-                  <span>${cartTotal.toLocaleString("es-CL")}</span>
-                </div>
- 
-                <button
-                  disabled={cart.length === 0}
-                  onClick={handlePlaceOrder}
-                  className={`w-full py-3 rounded-xl text-center text-[11px] font-extrabold tracking-wide uppercase transition-all flex items-center justify-center space-x-1.5 border ${
-                    cart.length > 0
-                      ? "bg-accent text-primary border-transparent hover:bg-emerald-400 cursor-pointer shadow-sm"
-                      : "bg-slate-100 text-slate-400 border-slate-200 cursor-not-allowed"
-                  }`}
-                >
-                  <ShoppingBag className="h-3.5 w-3.5" />
-                  <span>Enviar Pedido a Cocina</span>
-                </button>
-              </div>
- 
             </div>
           </div>
- 
-          {/* Lado B: Kitchen KDS Monitor View */}
-          <div className={`md:col-span-7 ${viewMode === "kitchen" ? "block" : "hidden md:block"}`}>
-            <h3 className="text-center font-bold text-primary text-sm mb-3 uppercase tracking-wider hidden md:block">
-              🖥️ Vista de Cocina (Monitor KDS)
-            </h3>
-            
-            {/* Tablet Mockup Frame */}
-            <div className="w-full bg-slate-950 rounded-[24px] p-3 sm:p-4 shadow-2xl border-4 border-primary aspect-[4/3] sm:aspect-[1.5] flex flex-col overflow-hidden min-h-[360px]">
-              
-              {/* KDS Header */}
-              <div className="flex justify-between items-center pb-3 border-b border-slate-800 mb-4 shrink-0">
-                <div className="flex items-center space-x-2">
-                  <span className="h-2.5 w-2.5 rounded-full bg-accent animate-ping" />
-                  <span className="h-2.5 w-2.5 absolute rounded-full bg-accent" />
-                  <h4 className="text-xs font-black text-white uppercase tracking-wider pl-4">
-                    Monitor de Cocina KDS
-                  </h4>
-                </div>
-                <div className="flex items-center space-x-2 text-[10px] text-slate-400">
-                  <span className="bg-slate-900 px-2 py-0.5 rounded border border-slate-800 font-bold">
-                    Región de O&apos;Higgins
-                  </span>
-                  <span>|</span>
-                  <span className="font-semibold text-accent">Online</span>
-                </div>
-              </div>
- 
-              {/* KDS Active Tickets Grid */}
-              <div className="flex-grow overflow-x-auto pb-2 flex gap-4 items-start select-none">
-                {orders.length === 0 ? (
-                  <div className="w-full h-full flex flex-col items-center justify-center text-slate-500 space-y-3 py-12">
-                    <AlertCircle className="h-8 w-8 text-slate-600 animate-pulse" />
-                    <p className="text-xs font-semibold">No hay comandas activas en la cocina.</p>
-                    <p className="text-[10px] text-slate-600">Envía un pedido desde la demo de Bowls en el celular.</p>
-                  </div>
-                ) : (
-                  orders.map((order) => (
-                    <div
-                      key={order.id}
-                      className={`w-[190px] sm:w-[210px] shrink-0 rounded-xl border flex flex-col justify-between shadow-md transition-all duration-300 animate-fade-in ${
-                        order.status === "Listo"
-                          ? "bg-slate-900/60 border-slate-800 opacity-60"
-                          : "bg-white border-slate-350 shadow-md text-slate-800"
-                      }`}
-                    >
-                      {/* Ticket Header */}
-                      <div
-                        className={`p-3 rounded-t-xl flex justify-between items-center border-b ${
-                          order.status === "Listo"
-                            ? "bg-slate-900/40 border-slate-800 text-slate-400"
-                            : "bg-slate-cold border-slate-200 text-primary"
-                        }`}
-                      >
-                        <div>
-                          <span className="text-[11px] font-black">#ORDEN {order.orderNum}</span>
-                          <span className="text-[9px] block font-semibold text-slate-400">
-                            {elapsedTimes[order.id] || "Hace instantes"}
-                          </span>
-                        </div>
-                        <span
-                          className={`text-[9px] font-black uppercase px-2 py-0.5 rounded ${
-                            order.status === "Listo"
-                              ? "bg-slate-800 text-slate-500"
-                              : "bg-gold/15 text-gold border border-gold/25"
-                          }`}
-                        >
-                          {order.status}
-                        </span>
-                      </div>
- 
-                      {/* Ticket Items */}
-                      <div className="p-3.5 flex-grow space-y-2 max-h-[140px] overflow-y-auto">
-                        {order.items.map((item, idx) => (
-                          <div key={idx} className="flex justify-between items-start text-[10.5px]">
-                            <span className={`font-semibold ${order.status === "Listo" ? "text-slate-500" : "text-slate-700"}`}>
-                              <span className="font-black text-primary bg-slate-cold border border-slate-250 px-1 rounded mr-1">
-                                {item.quantity}x
-                              </span>
-                              {item.name}
-                            </span>
-                          </div>
-                        ))}
-                      </div>
- 
-                      {/* Ticket Footer / Action */}
-                      <div className="p-3 border-t border-slate-100 bg-slate-cold rounded-b-xl flex flex-col space-y-2">
-                        <div className="flex justify-between items-center text-[10px] font-bold text-slate-500">
-                          <span>Total Pago:</span>
-                          <span className="text-primary font-black">${order.total.toLocaleString("es-CL")}</span>
-                        </div>
-                        
-                        {order.status === "Listo" ? (
-                          <button
-                            onClick={() => handleDismissOrder(order.id)}
-                            className="w-full py-1.5 bg-slate-200 border border-slate-300 hover:bg-slate-300 text-slate-700 rounded-lg text-[9px] font-bold tracking-wider uppercase transition-colors cursor-pointer"
-                          >
-                            Despachar Ticket
-                          </button>
-                        ) : (
-                          <button
-                            onClick={() => handleCompleteOrder(order.id)}
-                            className="w-full py-2 bg-accent hover:bg-emerald-400 text-primary border border-transparent rounded-lg text-[9px] font-bold tracking-wider uppercase transition-colors flex items-center justify-center space-x-1 cursor-pointer"
-                          >
-                            <CheckCircle2 className="h-3 w-3 text-primary" />
-                            <span>Marcar como Listo</span>
-                          </button>
-                        )}
-                      </div>
-                    </div>
-                  ))
-                )}
-              </div>
- 
-            </div>
-          </div>
- 
-        </div>
+        )}
  
       </div>
     </section>
