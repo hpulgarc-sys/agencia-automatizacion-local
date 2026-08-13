@@ -235,28 +235,35 @@ export default function Demos() {
           )}
         </div>
  
-        {/* Demo Selector Tabs */}
-        <div className="flex justify-center space-x-2.5 mb-12 max-w-md mx-auto bg-slate-200/50 p-1 rounded-xl border border-slate-250/20">
+        {/* Switch Selector */}
+        <div className="flex items-center justify-center space-x-4 mb-12 select-none">
+          <span className={`text-[11px] font-black tracking-wider uppercase transition-colors duration-300 ${
+            demoTab === "restaurante" ? "text-primary" : "text-slate-400"
+          }`}>
+            🍔 Gastronomía & KDS
+          </span>
+          
           <button
-            onClick={() => setDemoTab("restaurante")}
-            className={`flex-1 py-2.5 rounded-lg text-xs font-bold tracking-tight transition-all duration-200 cursor-pointer ${
-              demoTab === "restaurante"
-                ? "bg-primary text-white shadow-sm border-transparent"
-                : "text-slate-600 hover:text-primary"
-            }`}
+            onClick={() => setDemoTab(demoTab === "restaurante" ? "barberia" : "restaurante")}
+            className="w-14 h-8 bg-slate-200 border border-slate-350/30 rounded-full p-1 transition-colors duration-300 relative focus:outline-none cursor-pointer"
+            aria-label="Alternar Demostración"
           >
-            🍔 Menú & Cocina (KDS)
+            <div
+              className={`w-6 h-6 rounded-full shadow transition-all duration-300 flex items-center justify-center ${
+                demoTab === "barberia" 
+                  ? "translate-x-6 bg-primary" 
+                  : "translate-x-0 bg-accent"
+              }`}
+            >
+              <div className="w-1.5 h-1.5 rounded-full bg-white animate-pulse" />
+            </div>
           </button>
-          <button
-            onClick={() => setDemoTab("barberia")}
-            className={`flex-1 py-2.5 rounded-lg text-xs font-bold tracking-tight transition-all duration-200 cursor-pointer ${
-              demoTab === "barberia"
-                ? "bg-primary text-white shadow-sm border-transparent"
-                : "text-slate-600 hover:text-primary"
-            }`}
-          >
-            ✂️ Reserva de Citas
-          </button>
+ 
+          <span className={`text-[11px] font-black tracking-wider uppercase transition-colors duration-300 ${
+            demoTab === "barberia" ? "text-primary" : "text-slate-400"
+          }`}>
+            ✂️ Barbería Premium
+          </span>
         </div>
  
         {demoTab === "restaurante" ? (
